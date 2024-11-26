@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
@@ -22,7 +21,7 @@ import UserDetail from "../pages/User/UserDetail.jsx";
 import UserPayment from "../pages/User/UserPayment.jsx";
 import StaffOrders from "../pages/Order/StaffOrders.jsx";
 import AdminOrder from "../pages/Order/AdminOrder.jsx";
-import ProductItemSearch from "../pages/ProductItemSearch/ProductItemSearch";
+import ProductItemSearch from "../pages/Promotion/ProductItemSearch";
 import NewsDetail from "../pages/News/NewsDetail.jsx";
 import AdminDashboard from "../pages/Admin/AdminDashboard.jsx";
 import UserConsignment from "../pages/Consignment/UserConsignment.jsx";
@@ -89,7 +88,6 @@ const AppRoutes = () => {
         <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route path="/productItem-comparison" element={<ProductComparison />} />
-
 
         <Route path="*" element={<NotFoundRoute />} />
       </Routes>

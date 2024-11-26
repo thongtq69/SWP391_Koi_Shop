@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* background: lightblue url("/public/assets/background.png") no-repeat fixed
+  /* background: lightblue url("/assets/background.png") no-repeat fixed
       center !important; */
   background: rgba(0, 0, 0, 0.3);
   display: flex;

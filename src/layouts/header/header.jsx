@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fetchAllProducts } from "../../services/ProductService";
@@ -6,12 +7,11 @@ import { getProdItemByProdId } from "../../services/ProductItemService";
 import { UserContext } from "../../contexts/UserContext";
 import "./header.css";
 
-import logo from "../../../public/assets/icon.png";
-import logo1 from "../../../public/assets/image 9.png";
-import search from "../../../public/icons/Search.png";
-import cart from "../../../public/icons/Shopping Cart.png";
-import list from "../../../public/icons/Group 201.png";
-
+const logo = "/assets/icon.png?url";
+const logo1 = "/assets/image 9.png?url";
+const search = "/icons/Search.png?url";
+const cart = "/icons/Shopping Cart.png?url";
+const list = "/icons/Group 201.png?url";
 export const Header = () => {
   const { user, logout } = useContext(UserContext);
 
@@ -20,6 +20,7 @@ export const Header = () => {
   const dropdownRef = useRef(null);
   const searchInputRef = useRef(null);
 
+  // eslint-disable-next-line no-unused-vars
   const [choose, setChoose] = useState("home");
   const [showDropdown, setShowDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -75,16 +76,20 @@ export const Header = () => {
 
   useEffect(() => {
     const checkCompareList = () => {
-      const compareList = JSON.parse(localStorage.getItem('compareList') || '[]');
+      const compareList = JSON.parse(
+        localStorage.getItem("compareList") || "[]"
+      );
       const newCount = compareList.length;
-      const lastCount = parseInt(localStorage.getItem('lastCompareCount') || '0');
-      
+      const lastCount = parseInt(
+        localStorage.getItem("lastCompareCount") || "0"
+      );
+
       if (newCount >= 2 && lastCount < 2) {
         setShouldAnimate(true);
         setTimeout(() => setShouldAnimate(false), 300);
       }
-      
-      localStorage.setItem('lastCompareCount', newCount.toString());
+
+      localStorage.setItem("lastCompareCount", newCount.toString());
       setCompareListCount(newCount);
       setShowCompareButton(newCount >= 2);
     };
@@ -154,7 +159,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     logout();
-    localStorage.removeItem('compareList');
+    localStorage.removeItem("compareList");
     navigate("/");
     toast.success("Logout Success");
   };
@@ -195,7 +200,9 @@ export const Header = () => {
           <div className="nav-search-grid">
             {showCompareButton && (
               <button
-                className={`comparison-btn ${shouldAnimate ? 'animate-popup' : ''}`}
+                className={`comparison-btn ${
+                  shouldAnimate ? "animate-popup" : ""
+                }`}
                 onClick={handleComparisonClick}
                 title="So sánh sản phẩm"
               >
@@ -305,9 +312,9 @@ export const Header = () => {
                   <div className="dropdown-grid">
                     <li
                       className="dropdown-item special-item"
-                      onClick={() => navigate('/batches')}
+                      onClick={() => navigate("/batches")}
                     >
-                      Lô Cá 
+                      Lô Cá
                     </li>
                   </div>
 

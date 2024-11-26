@@ -1,31 +1,35 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { fetchAllProducts } from '../../services/ProductService';
-import { getProdItemByProdId } from '../../services/ProductItemService';
-import { Header } from '../../layouts/header/header';
-import { Footer } from '../../layouts/footer/footer';
-import './ProductItemSearch.css';
+import { useState, useEffect, useCallback } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { fetchAllProducts } from "../../services/ProductService";
+import { getProdItemByProdId } from "../../services/ProductItemService";
+import { Header } from "../../layouts/header/header";
+import { Footer } from "../../layouts/footer/footer";
+import "../ProductItemSearch/ProductItemSearch.css";
 
 const ProductItemSearch = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [allItems, setAllItems] = useState([]);
   const location = useLocation();
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const searchProductItems = useCallback(async (keyword) => {
-    if (keyword) {
-      setLoading(true);
-      const filteredItems = allItems.filter(item =>
-        item.name.toLowerCase().includes(keyword.toLowerCase()) ||
-        item.productName.toLowerCase().includes(keyword.toLowerCase())
-      );
-      setSearchResults(filteredItems);
-      setLoading(false);
-    } else {
-      setSearchResults([]);
-    }
-  }, [allItems]);
+  const searchProductItems = useCallback(
+    async (keyword) => {
+      if (keyword) {
+        setLoading(true);
+        const filteredItems = allItems.filter(
+          (item) =>
+            item.name.toLowerCase().includes(keyword.toLowerCase()) ||
+            item.productName.toLowerCase().includes(keyword.toLowerCase())
+        );
+        setSearchResults(filteredItems);
+        setLoading(false);
+      } else {
+        setSearchResults([]);
+      }
+    },
+    [allItems]
+  );
 
   useEffect(() => {
     const fetchAllItems = async () => {
@@ -36,7 +40,10 @@ const navigate = useNavigate();
           const allProductItems = await Promise.all(
             productsResponse.data.map(async (product) => {
               const itemResponse = await getProdItemByProdId(product.id);
-              return itemResponse.data.map(item => ({ ...item, productName: product.name }));
+              return itemResponse.data.map((item) => ({
+                ...item,
+                productName: product.name,
+              }));
             })
           );
           const flattenedItems = allProductItems.flat();
@@ -54,7 +61,7 @@ const navigate = useNavigate();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const keyword = searchParams.get('keyword');
+    const keyword = searchParams.get("keyword");
     searchProductItems(keyword);
   }, [location.search, searchProductItems]);
 
@@ -69,7 +76,10 @@ const navigate = useNavigate();
       <Header />
       <div className="search-page">
         <div className="search-container animated">
-          <h2>Kết quả tìm kiếm cho "{new URLSearchParams(location.search).get('keyword')}"</h2>
+          <h2>
+            Kết quả tìm kiếm cho &quot;
+            {new URLSearchParams(location.search).get("keyword")}&quot;
+          </h2>
           {loading ? (
             <div className="loading">
               <div className="spinner"></div>
@@ -78,21 +88,40 @@ const navigate = useNavigate();
           ) : searchResults.length > 0 ? (
             <div className="search-results-grid">
               {searchResults.map((item) => (
-                <div key={item.id} className="search-result-item" onClick={() => handleProductItemClick(item.productName, item)}>
+                <div
+                  key={item.id}
+                  className="search-result-item"
+                  onClick={() => handleProductItemClick(item.productName, item)}
+                >
                   <div className="item-image">
-                    <img src={item.imageUrl} alt={item.name} onError={(e) => {e.target.onerror = null; e.target.src='/path/to/placeholder-image.jpg'}} />
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/path/to/placeholder-image.jpg";
+                      }}
+                    />
                   </div>
                   <div className="item-details">
                     <h3>{item.name}</h3>
                     <p className="product-name">Sản phẩm: {item.productName}</p>
-                    <p className="price">Giá: {item.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                    <p className="price">
+                      Giá:{" "}
+                      {item.price.toLocaleString("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
+                    </p>
                     <p className="size">Kích thước: {item.size} cm</p>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="no-results">Không tìm thấy kết quả phù hợp cho từ khóa này.</p>
+            <p className="no-results">
+              Không tìm thấy kết quả phù hợp cho từ khóa này.
+            </p>
           )}
         </div>
       </div>

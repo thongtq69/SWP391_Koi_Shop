@@ -38,8 +38,8 @@
 
   --margin-center: 0 auto;
 
-  --primary-background-light: url("/public/assets/backgroundUpscale.png")
-    no-repeat center center fixed;
+  --primary-background-light: url("/assets/backgroundUpscale.png") no-repeat
+    center center fixed;
 }
 
 *,

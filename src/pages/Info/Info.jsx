@@ -1,12 +1,11 @@
-import React from "react";
 import { Header } from "../../layouts/header/header";
 import "./Info.css";
 import "../../styles/animation.css";
-import ceoImage from "../../../public/assets/ceo.jpg";
-import ctoImage from "../../../public/assets/cto.jpg";
-import cfoImage from "../../../public/assets/cfo.jpg";
-import { Footer } from "../../layouts/footer/footer";
 
+import { Footer } from "../../layouts/footer/footer";
+const ceoImage = "/assets/ceo.jpg?url";
+const ctoImage = "/assets/cto.jpg?url";
+const cfoImage = "/assets/cfo.jpg?url";
 const Info = () => {
   const teamMembers = [
     {
@@ -37,7 +36,7 @@ const Info = () => {
             <h2 className="text-center">Sứ Mệnh Của Chúng Tôi</h2>
             <br />
             <h2 className="fst-italic fw-bold" style={{ color: "#319795" }}>
-              "CÁ KOI CỦA BẠN - TIỀN CỦA CHÚNG TÔI"
+              &quot;CÁ KOI CỦA BẠN - TIỀN CỦA CHÚNG TÔI&quot;
             </h2>
           </section>
 

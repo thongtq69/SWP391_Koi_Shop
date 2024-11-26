@@ -1,9 +1,8 @@
-import React from "react";
 import { Header } from "../../layouts/header/header";
 import { Footer } from "../../layouts/footer/footer";
 import "./Home.css";
 import "../../styles/animation.css";
-import fish from "../../../public/assets/img_sec.png";
+
 import { useEffect, useState } from "react";
 import {
   getAllProdItem,
@@ -16,7 +15,7 @@ import FishSpinner from "../../components/FishSpinner";
 import { addToCart } from "../../services/CartService";
 import { toast } from "react-toastify";
 import { getUserInfo } from "../../services/UserService";
-
+const fish = "/assets/img_sec.png?url";
 export const Home = () => {
   const [productItems, setProductItems] = useState([]);
   const [blogs, setBlogs] = useState([]);
@@ -47,7 +46,7 @@ export const Home = () => {
     document.body.appendChild(script);
 
     script.onload = () => {
-      const tudong_chatbox = new TuDongChat('0gZTvtFBAwLSMw1Du_cQl');
+      const tudong_chatbox = new window.TuDongChat("0gZTvtFBAwLSMw1Du_cQl");
       tudong_chatbox.initial();
     };
 
@@ -65,7 +64,8 @@ export const Home = () => {
       const productName = productResponse.data.name;
 
       navigate(
-        `/koi/${productName.toLowerCase().replace(/\s+/g, "")}/${productItem.id
+        `/koi/${productName.toLowerCase().replace(/\s+/g, "")}/${
+          productItem.id
         }`,
         {
           state: { response: prodItemResponse.data, productName },
@@ -89,7 +89,7 @@ export const Home = () => {
       if (response.data && response.data.cartId) {
         const userResponse = await getUserInfo();
         const userData = userResponse.data;
-        
+
         if (quickBuy) {
           if (!userData.address || !userData.phone) {
             navigate(`/${userData.id}/detail?fromCart=true`);
@@ -97,7 +97,7 @@ export const Home = () => {
           }
           navigate("/order");
         } else {
-          toast.success(`Đã thêm ${productItem.name} vào giỏ hàng`);
+          toast.success(`Đã thêm vào giỏ hàng`);
         }
       } else {
         toast.error("Sản phẩm đã hết hàng");
@@ -188,13 +188,15 @@ export const Home = () => {
             </h2>
             <div className="homepage-news-list">
               {isLoading ? (
-                <><FishSpinner /></>
+                <>
+                  <FishSpinner />
+                </>
               ) : blogs.length > 0 ? (
                 blogs.map((blog) => (
                   <div className="homepage-news-card" key={blog.id}>
                     <div className="news-card-image-container">
                       <img
-                        src={blog.imageUrl || "./public/assets/default.jpg"}
+                        src={blog.imageUrl || "./assets/default.jpg"}
                         alt={blog.title}
                         className="news-card-image"
                       />
@@ -215,7 +217,9 @@ export const Home = () => {
                       <button
                         className="news-card-button"
                         onClick={() => handleReadMore(blog.id)}
-                      >Đọc thêm</button>
+                      >
+                        Đọc thêm
+                      </button>
                     </div>
                   </div>
                 ))

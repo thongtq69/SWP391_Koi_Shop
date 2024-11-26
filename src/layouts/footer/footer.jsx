@@ -1,14 +1,14 @@
 // import React from "react";
-import logo from "../../../public/assets/icon.png";
-import logo1 from "../../../public/assets/image 9.png";
-import arrow from "../../../public/icons/Group 10.png";
-import check from "../../../public/icons/Group 208.png";
-import gift from "../../../public/icons/Group 207.png";
-import cart from "../../../public/icons/Shopping Cart.png";
-import { Col, Container, Row } from "react-bootstrap";
-import React, { useState, useRef } from "react";
-import { toast } from "react-toastify";
 
+import { Col, Container, Row } from "react-bootstrap";
+import { useState, useRef } from "react";
+import { toast } from "react-toastify";
+const logo = "/assets/icon.png?url";
+const logo1 = "/assets/image 9.png?url";
+const arrow = "/icons/Group 10.png?url";
+const check = "/icons/Group 208.png?url";
+const gift = "/icons/Group 207.png?url";
+const cart = "/icons/Shopping Cart.png?url";
 const zalo_invite_url = import.meta.env.VITE_ZALO_INVITATION;
 
 export const Footer = () => {
