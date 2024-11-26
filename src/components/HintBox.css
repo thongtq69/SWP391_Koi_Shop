@@ -1,0 +1,22 @@
+.hint-box {
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.close-box-btn {
+  background: none;
+  border: none;
+  color: #721c24;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.close-box-btn:hover {
+  color: #92a71c;
+}
+
