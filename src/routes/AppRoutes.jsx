@@ -21,7 +21,7 @@ import UserDetail from "../pages/User/UserDetail.jsx";
 import UserPayment from "../pages/User/UserPayment.jsx";
 import StaffOrders from "../pages/Order/StaffOrders.jsx";
 import AdminOrder from "../pages/Order/AdminOrder.jsx";
-import ProductItemSearch from "../pages/Promotion/ProductItemSearch";
+import ProductItemSearch from "../pages/ProductItemSearch/ProductItemSearch";
 import NewsDetail from "../pages/News/NewsDetail.jsx";
 import AdminDashboard from "../pages/Admin/AdminDashboard.jsx";
 import UserConsignment from "../pages/Consignment/UserConsignment.jsx";
@@ -35,6 +35,7 @@ import AdminPromotion from "../pages/Promotion/AdminPromotion.jsx";
 import AdminBatch from "../pages/Batch/AdminBatch.jsx";
 import Batches from "../pages/Batches/Batches.jsx";
 import BatchDetail from "../pages/Batches/BatchDetail.jsx";
+import { AdminLayout } from "../layouts/index.jsx";
 
 const AppRoutes = () => {
   return (
@@ -52,15 +53,17 @@ const AppRoutes = () => {
         <Route path="/:id/detail" element={<UserDetail />} />
         <Route path="/:id/payments" element={<UserPayment />} />
 
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin-product" element={<AdminProduct />} />
-        <Route path="/admin-blog" element={<AdminBlog />} />
-        <Route path="/admin-certificate" element={<AdminCertificate />} />
-        <Route path="/admin-consignment" element={<AdminConsignment />} />
-        <Route path="/admin-order" element={<AdminOrder />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/admin-promotion" element={<AdminPromotion />} />
-        <Route path="/admin-batch" element={<AdminBatch />} />
+        <Route element={<AdminLayout />}>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin-product" element={<AdminProduct />} />
+          <Route path="/admin-blog" element={<AdminBlog />} />
+          <Route path="/admin-certificate" element={<AdminCertificate />} />
+          <Route path="/admin-consignment" element={<AdminConsignment />} />
+          <Route path="/admin-order" element={<AdminOrder />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/admin-promotion" element={<AdminPromotion />} />
+          <Route path="/admin-batch" element={<AdminBatch />} />
+        </Route>
 
         <Route path="/product" element={<Product />} />
 

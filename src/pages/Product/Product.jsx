@@ -5,10 +5,10 @@ import "../../styles/animation.css";
 import { fetchAllProducts } from "../../services/ProductService";
 import { toast } from "react-toastify";
 import { Footer } from "../../layouts/footer/footer";
-
+import defaultImage from "../../../public/assets/post2.jpg";
 import { useNavigate } from "react-router-dom";
 import { getProdItemByProdId } from "../../services/ProductItemService";
-const defaultImage = "/assets/post2.jpg?url";
+
 const Product = () => {
   const [listProducts, setListProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +25,7 @@ const Product = () => {
       if (response?.data) {
         // Xử lý từng sản phẩm một cách tuần tự
         const productsWithApprovedCount = [];
-
+        
         for (const product of response.data) {
           try {
             const itemsResponse = await getProdItemByProdId(product.id);
@@ -34,29 +34,26 @@ const Product = () => {
                 (item) => item.type === "Approved"
               );
               const totalQuantity = approvedItems.reduce(
-                (sum, item) => sum + (item.quantity || 0),
+                (sum, item) => sum + (item.quantity || 0), 
                 0
               );
               productsWithApprovedCount.push({
                 ...product,
                 quantity: totalQuantity,
-                approvedItems: approvedItems, // Lưu danh sách items đã approved
+                approvedItems: approvedItems // Lưu danh sách items đã approved
               });
             }
           } catch (error) {
-            console.warn(
-              `Failed to fetch items for product ${product.id}:`,
-              error
-            );
+            console.warn(`Failed to fetch items for product ${product.id}:`, error);
             // Vẫn thêm sản phẩm vào danh sách nhưng với quantity = 0
             productsWithApprovedCount.push({
               ...product,
               quantity: 0,
-              approvedItems: [],
+              approvedItems: []
             });
           }
         }
-
+        
         setListProducts(productsWithApprovedCount);
       }
     } catch (error) {
@@ -74,9 +71,9 @@ const Product = () => {
     }
 
     navigate(`/koi/${product.name.toLowerCase().replace(/\s+/g, "")}`, {
-      state: {
-        response: product.approvedItems,
-        productName: product.name,
+      state: { 
+        response: product.approvedItems, 
+        productName: product.name 
       },
     });
   };
@@ -95,9 +92,7 @@ const Product = () => {
                 listProducts.map((product) => (
                   <div
                     key={product.id}
-                    className={`product-card ${
-                      !product.quantity ? "out-of-stock" : ""
-                    }`}
+                    className={`product-card ${!product.quantity ? 'out-of-stock' : ''}`}
                     onClick={() => handleProductClick(product)}
                   >
                     <div className="product-image-container">
@@ -116,7 +111,7 @@ const Product = () => {
                         Số lượng: {product.quantity || 0}
                       </p>
                       <button className="product-button">
-                        {product.quantity ? "Xem chi tiết" : "Hết hàng"}
+                        {product.quantity ? 'Xem chi tiết' : 'Hết hàng'}
                       </button>
                     </div>
                     {product.description && (

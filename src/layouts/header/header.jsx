@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fetchAllProducts } from "../../services/ProductService";
@@ -7,11 +6,12 @@ import { getProdItemByProdId } from "../../services/ProductItemService";
 import { UserContext } from "../../contexts/UserContext";
 import "./header.css";
 
-const logo = "/assets/icon.png?url";
-const logo1 = "/assets/image 9.png?url";
-const search = "/icons/Search.png?url";
-const cart = "/icons/Shopping Cart.png?url";
-const list = "/icons/Group 201.png?url";
+import logo from "../../../public/assets/icon.png";
+import logo1 from "../../../public/assets/image 9.png";
+import search from "../../../public/icons/Search.png";
+import cart from "../../../public/icons/Shopping Cart.png";
+import list from "../../../public/icons/Group 201.png";
+
 export const Header = () => {
   const { user, logout } = useContext(UserContext);
 
@@ -20,7 +20,6 @@ export const Header = () => {
   const dropdownRef = useRef(null);
   const searchInputRef = useRef(null);
 
-  // eslint-disable-next-line no-unused-vars
   const [choose, setChoose] = useState("home");
   const [showDropdown, setShowDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -195,7 +194,10 @@ export const Header = () => {
         <div className="nav-content">
           <div className="nav-logo" onClick={() => navigate("/")}>
             <img src={logo} className="logo-image" alt="#" />
-            <img src={logo1} className="logo1-image" alt="#" />
+            {/* <img src={logo1} className="logo1-image" alt="#" /> */}
+            <div style={{ fontSize: "24px", color: "#FFFFFF" }}>
+              KOI SHOWCASE
+            </div>
           </div>
           <div className="nav-search-grid">
             {showCompareButton && (
@@ -212,7 +214,7 @@ export const Header = () => {
             <form onSubmit={handleSearch} className="nav-search-bar">
               <input
                 type="text"
-                placeholder='Tìm kiếm "chú cá" phù hợp với bạn...'
+                placeholder="Nhập từ khóa muốn tìm kiếm..."
                 value={searchKeyword}
                 onChange={handleSearchChange}
                 ref={searchInputRef}
@@ -233,7 +235,7 @@ export const Header = () => {
                 <div className="nav-info user-select-none">
                   <span>
                     <i className="fa-regular fa-user"></i> :{" "}
-                    <span className="fw-bold">{user.email}</span>
+                    <span clbue="fw-bold">{user.email}</span>
                   </span>
                   <div ref={dropdownRef}>
                     <button
@@ -284,6 +286,16 @@ export const Header = () => {
                 </button>
 
                 <button
+                  className="d-flex flex-row border border-0 rounded align-items-center justify-content-center bg-white text-black"
+                  style={{ width: 150, height: 50 }}
+                  onClick={() => {
+                    navigate("/register");
+                  }}
+                >
+                  Đăng Ký
+                </button>
+
+                <button
                   className="d-flex flex-row border border-0 rounded align-items-center justify-content-center bg-black text-white"
                   style={{ width: 50, height: 50 }}
                   onClick={handleClickCart}
@@ -297,16 +309,16 @@ export const Header = () => {
 
         <div className="dropdown-wrapper">
           <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <button
+            {/* <button
               className="dropdown-btn user-select-none"
               value={"product"}
               onClick={handleChoose}
             >
               <img className="icon user-select-none" src={list} />
               DANH MỤC KOI
-            </button>
+            </button> */}
 
-            <div className="dropdown-menu">
+            {/* <div className="dropdown-menu">
               {showDropdown && (
                 <div className="row dropdown-row row-cols-4">
                   <div className="dropdown-grid">
@@ -330,7 +342,7 @@ export const Header = () => {
                   ))}
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
 
           <button
@@ -344,6 +356,24 @@ export const Header = () => {
           >
             TRANG CHỦ
           </button>
+
+          <button
+            className="d-flex flex-row justify-content-center"
+            value={"product"}
+            style={{
+              background:
+                location.pathname === "/product" ? "#C70025" : "#281713",
+              width: 250,
+            }}
+            onClick={handleChoose}
+          >
+            DANH SÁCH CÁ KOI
+          </button>
+
+          {/* <button className="" value={"product"} onClick={handleChoose}>
+            <img className="icon user-select-none" src={list} />
+            DANH MỤC KOI
+          </button> */}
           <button
             className="d-flex flex-row justify-content-center"
             value={"info"}
