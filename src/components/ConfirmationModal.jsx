@@ -2,13 +2,6 @@
 import "./ConfirmationModal.css";
 import PropTypes from "prop-types";
 
-ConfirmationModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onConfirm: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired,
-};
-
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
   if (!isOpen) return null;
 
